@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ece8df">
+  <meta name="description" content="Agência Retrato Viagens. Curadoria boutique de viagens de luxo sob medida, com base em São Paulo. Destinos, hotelaria e experiências pensados para você.">
+  <title>Agência Retrato - Viagens que refletem o que importa</title>
+  <meta property="og:title" content="Agência Retrato — Viagens sob medida">
+  <meta property="og:description" content="Curadoria boutique. Escolhas cuidadosas. Viagens no seu ritmo.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/hero.jpg" as="image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+  <header class="header" id="header">
+    <a class="wordmark" href="#inicio" aria-label="Agência Retrato, início"><span>agência</span><strong>(re)trato</strong></a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="#destinos">Destinos <span>⌄</span></a>
+      <a href="#experiencia">A experiência Retrato</a>
+      <a href="#sobre">Sobre nós</a>
+      <a href="#journal">Journal</a>
+    </nav>
+    <a class="header-cta" href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener">Planeje sua viagem <span aria-hidden="true">↗</span></a>
+    <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button>
+  </header>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação no celular" hidden>
+    <a href="#destinos">Destinos</a><a href="#experiencia">A experiência Retrato</a><a href="#sobre">Sobre nós</a><a href="#journal">Journal</a>
+    <a href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener">Planeje sua viagem ↗</a>
+    <a href="https://viagens.meuagente.com/br/trips/" target="_blank" rel="noopener">Acesse sua viagem ↗</a>
+  </nav>
+  <main id="conteudo">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <img class="hero-image" src="assets/hero.jpg" alt="Refúgio à beira-mar ao entardecer, com coqueiros e espaços de descanso diante do oceano" fetchpriority="high">
+      <div class="hero-shade"></div>
+      <div class="hero-copy">
+        <p class="eyebrow light">VIAGENS SOB MEDIDA · CURADORIA BOUTIQUE</p>
+        <h1 id="hero-title">Viagens que refletem<br>o que <em>importa.</em></h1>
+        <p class="hero-subtitle">O mundo tem muitas possibilidades.<br>A sua viagem tem um jeito só seu.</p>
+        <div class="hero-actions"><a class="button button-cream" href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener">Planeje sua viagem <span>↗</span></a><a class="button button-outline" href="#destinos">Encontre sua inspiração <span>↓</span></a></div>
+      </div>
+      <div class="hero-bottom"><span>SÃO PAULO, BRASIL · PARA ONDE VOCÊ QUISER</span><a href="#sobre">O próximo capítulo começa aqui <span>↓</span></a><span class="hero-index">01 — RETRATO</span></div>
+    </section>
+
+    <div class="brand-strip"><span>Seu tempo.</span><span class="star" aria-hidden="true">✳</span><span>Seu ritmo.</span><span class="star" aria-hidden="true">✳</span><span>Sua maneira de viajar.</span></div>
+
+    <section class="intro section-wrap" id="sobre" aria-labelledby="intro-title">
+      <div class="intro-copy">
+        <p class="eyebrow">A AGÊNCIA RETRATO</p>
+        <h2 id="intro-title">Não é só sobre<br>para onde ir.<br>É sobre <em>como sentir.</em></h2>
+        <p>Somos uma agência boutique de viagens com base em São Paulo. Criamos viagens de luxo sob medida a partir do seu momento, das suas preferências e do que você deseja viver.</p>
+        <p>Da escolha do hotel ao ritmo de cada dia, conectamos destinos, deslocamentos e experiências em um roteiro que faz sentido para você.</p>
+        <a class="text-link" href="https://www.agenciaretrato.com/sobre" target="_blank" rel="noopener">Conheça a Retrato <span>↗</span></a>
+      </div>
+      <div class="intro-mosaic">
+        <img class="intro-main" src="assets/retreat.png" alt="Piscina de borda infinita diante de um lago cercado por montanhas ao entardecer" loading="lazy">
+        <img class="intro-inset" src="assets/bungalow.webp" alt="Bangalô do Casana Hotel com piscina privativa, na Praia do Preá, Ceará" loading="lazy">
+        <span class="photo-note">MENOS PRESSA. MAIS PRESENÇA.</span>
+        <span class="round-seal" aria-hidden="true">feito<br><i>para</i><br>você</span>
+      </div>
+    </section>
+
+    <section class="destinations" id="destinos" aria-labelledby="destinations-title">
+      <div class="section-wrap">
+        <div class="section-heading"><div><p class="eyebrow">UM NOVO OLHAR PARA O MUNDO</p><h2 id="destinations-title">Onde você quer<br><em>se encontrar?</em></h2></div><p>Comece por uma inspiração.<br>O roteiro a gente desenha com você.</p></div>
+        <div class="destination-toolbar"><div class="filters" role="group" aria-label="Filtrar inspirações por região"><button type="button" class="filter active" data-filter="brasil" aria-pressed="true">Pelo Brasil</button><button type="button" class="filter" data-filter="mundo" aria-pressed="false">Pelo mundo</button><button type="button" class="filter" data-filter="todos" aria-pressed="false">Todos</button></div><span class="destination-note" id="destination-count" aria-live="polite">3 inspirações brasileiras</span></div>
+        <div class="destination-grid">
+          <a class="destination-card" data-region="brasil" href="https://www.agenciaretrato.com/retratonews/reveillon-2027-nannai-milagres-pacote-valores" target="_blank" rel="noopener"><div class="card-image"><img src="assets/milagres.jpg" alt="Coqueiros e mar na Praia do Marceneiro, em Alagoas" loading="lazy"><span class="card-tag">ALAGOAS, BRASIL</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-copy"><span class="card-category">MAR & CELEBRAÇÃO</span><h3>Milagres</h3><p>O encontro entre a Costa dos Corais e uma nova maneira de celebrar.</p><span class="card-link">Descubra o NANNAI Milagres <span>↗</span></span></div></a>
+          <a class="destination-card" data-region="brasil" href="https://www.agenciaretrato.com/retratonews/casana-hotel-praia-do-prea-slh" target="_blank" rel="noopener"><div class="card-image"><img src="assets/prea.jpg" alt="Vista aérea do Casana Hotel diante da Praia do Preá, no Ceará" loading="lazy"><span class="card-tag">CEARÁ, BRASIL</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-copy"><span class="card-category">NATUREZA & DESACELERAÇÃO</span><h3>Praia do Preá</h3><p>Mar, vento e a intimidade de uma hospedagem boutique à beira da praia.</p><span class="card-link">Conheça o Casana Hotel <span>↗</span></span></div></a>
+          <a class="destination-card" data-region="brasil" href="https://www.agenciaretrato.com/retratonews/melhores-restaurantes-bares-rio-de-janeiro-2026-teste-pt" target="_blank" rel="noopener"><div class="card-image"><img src="assets/rio.jpeg" alt="Gastronomia em um restaurante selecionado pela Retrato no Rio de Janeiro" loading="lazy"><span class="card-tag">RIO DE JANEIRO, BRASIL</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-copy"><span class="card-category">GASTRONOMIA & CULTURA</span><h3>Rio de Janeiro</h3><p>Uma cidade para descobrir também à mesa, entre sabores e bons encontros.</p><span class="card-link">Explore a curadoria gastronômica <span>↗</span></span></div></a>
+          <a class="destination-card" data-region="mundo" href="https://www.agenciaretrato.com/retratonews/viagem-maldivas-guia-resorts-melhor-epoca" target="_blank" rel="noopener" hidden><div class="card-image"><img src="assets/maldivas.jpg" alt="Ilha nas Maldivas cercada por recifes, com villas sobre a água" loading="lazy"><span class="card-tag">OCEANO ÍNDICO</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-copy"><span class="card-category">HORIZONTE & PRIVACIDADE</span><h3>Maldivas</h3><p>Uma ilha, muitos tons de azul e tempo para viver no seu próprio ritmo.</p><span class="card-link">Encontre sua ilha <span>↗</span></span></div></a>
+          <a class="destination-card" data-region="mundo" href="https://www.agenciaretrato.com/retratonews/anantara-palazzo-naiadi-rome-hotel" target="_blank" rel="noopener" hidden><div class="card-image"><img src="assets/rome.jpg" alt="Anantara Palazzo Naiadi Rome Hotel diante da Fonte das Náiades, em Roma" loading="lazy"><span class="card-tag">ITÁLIA</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-copy"><span class="card-category">ARTE & HOSPITALIDADE</span><h3>Roma</h3><p>História, arquitetura e hotelaria para viver a cidade com outro olhar.</p><span class="card-link">Descubra o Palazzo Naiadi <span>↗</span></span></div></a>
+        </div>
+        <div class="destination-foot"><span>Inspirações do Journal Retrato. Sua viagem é planejada sob medida.</span><a class="text-link" href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener">Converse sobre seu próximo destino <span>↗</span></a></div>
+      </div>
+    </section>
+
+    <section class="experience section-wrap" id="experiencia" aria-labelledby="experience-title">
+      <div class="experience-heading"><p class="eyebrow light">A EXPERIÊNCIA RETRATO</p><h2 id="experience-title">O luxo de ter<br><em>tudo bem pensado.</em></h2><p>Escolhas cuidadosas fazem a diferença<br>antes mesmo de você embarcar.</p><a class="text-link light-link" href="https://www.agenciaretrato.com/agencia-boutique" target="_blank" rel="noopener">Nosso jeito de viajar <span>↗</span></a></div>
+      <div class="benefits"><article><span class="benefit-number">01 /</span><div><h3>Uma viagem com a sua identidade</h3><p>Seu perfil, suas prioridades e o ritmo que você procura orientam a curadoria.</p></div></article><article><span class="benefit-number">02 /</span><div><h3>Hotelaria escolhida com critério</h3><p>Localização, conforto e estilo de hospedagem em sintonia com cada jornada.</p></div></article><article><span class="benefit-number">03 /</span><div><h3>Logística que conecta tudo</h3><p>Voos, conexões e deslocamentos pensados como partes da mesma experiência.</p></div></article><article><span class="benefit-number">04 /</span><div><h3>Proximidade e discrição</h3><p>Atendimento personalizado para viagens de lazer, executivos e pequenos grupos.</p></div></article></div>
+    </section>
+
+    <section class="journey section-wrap" aria-labelledby="journey-title">
+      <div class="journey-heading"><p class="eyebrow">DO PRIMEIRO DESEJO AO PRÓXIMO EMBARQUE</p><h2 id="journey-title">Uma boa viagem<br>começa com <em>uma conversa.</em></h2></div>
+      <div class="journey-layout"><div class="journey-photo"><img src="assets/bungalow.webp" alt="Piscina privativa e varanda de um bangalô do Casana Hotel no Ceará" loading="lazy"><span>SEU PRÓXIMO CAPÍTULO</span></div><div class="steps"><article><span class="step-index">01</span><div><h3>Conte o que você imagina</h3><p>Compartilhe o momento da viagem, seus interesses, as datas e o que é essencial para você.</p></div></article><article><span class="step-index">02</span><div><h3>Dê forma à sua viagem</h3><p>Destinos, hospedagens e experiências ganham um desenho que respeita suas preferências e seu tempo.</p></div></article><article><span class="step-index">03</span><div><h3>Viva cada detalhe</h3><p>Com o planejamento alinhado, chegou a hora de transformar as escolhas em novas memórias.</p></div></article><a class="button button-dark" href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener">Vamos conversar <span>↗</span></a></div></div>
+    </section>
+
+    <section class="quote-section"><p class="eyebrow">NOSSA ESSÊNCIA</p><p class="brand-quote">O verdadeiro luxo está em ter<br>o tempo <em>bem conduzido.</em></p><span class="quote-sign">agência (re)trato</span></section>
+
+    <section class="journal section-wrap" id="journal" aria-labelledby="journal-title">
+      <div class="section-heading"><div><p class="eyebrow">IDEIAS PARA O PRÓXIMO CAPÍTULO</p><h2 id="journal-title">Retrato <em>Journal.</em></h2></div><a class="text-link" href="https://www.agenciaretrato.com/retrato-news" target="_blank" rel="noopener">Explore o Journal <span>↗</span></a></div>
+      <div class="journal-grid"><a href="https://www.agenciaretrato.com/retratonews/casana-hotel-praia-do-prea-slh" target="_blank" rel="noopener" class="journal-card"><div class="journal-image"><img src="assets/prea.jpg" alt="Hotel Casana e Praia do Preá vistos do alto" loading="lazy"></div><p class="eyebrow">HOTÉIS & RESIDÊNCIAS</p><h3>Casana: um refúgio boutique no litoral do Ceará</h3><span class="text-link">Leia a história <span>↗</span></span></a><a href="https://www.agenciaretrato.com/retratonews/melhores-restaurantes-bares-rio-de-janeiro-2026-teste-pt" target="_blank" rel="noopener" class="journal-card"><div class="journal-image"><img src="assets/rio.jpeg" alt="Prato de restaurante na curadoria gastronômica do Rio de Janeiro" loading="lazy"></div><p class="eyebrow">CURADORIA RETRATO</p><h3>Rio de Janeiro: uma viagem pelos sabores da cidade</h3><span class="text-link">Leia a história <span>↗</span></span></a><a href="https://www.agenciaretrato.com/retratonews/anantara-palazzo-naiadi-rome-hotel" target="_blank" rel="noopener" class="journal-card"><div class="journal-image"><img src="assets/rome.jpg" alt="Fachada histórica do Palazzo Naiadi em Roma" loading="lazy"></div><p class="eyebrow">DESIGN & HOSPITALIDADE</p><h3>Palazzo Naiadi: outro jeito de descobrir Roma</h3><span class="text-link">Leia a história <span>↗</span></span></a></div>
+    </section>
+
+    <section class="closing" id="contato" aria-labelledby="closing-title"><img src="assets/milagres.jpg" alt="Coqueiros à beira do mar na Costa dos Corais, Alagoas" loading="lazy"><div class="closing-shade"></div><div class="closing-copy"><p class="eyebrow light">SEU MUNDO. NOSSO OLHAR.</p><h2 id="closing-title">E se a próxima viagem<br>fosse a sua <em>melhor história?</em></h2><p>Vamos descobrir o que faz sentido para você.</p><a class="button button-cream" href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener">Comece sua viagem <span>↗</span></a></div></section>
+  </main>
+  <footer class="footer section-wrap"><div class="footer-top"><div class="footer-brand"><a class="wordmark" href="#inicio" aria-label="Agência Retrato, voltar ao início"><span>agência</span><strong>(re)trato</strong></a><p>Viagens que refletem<br>o que importa.</p><span>São Paulo, Brasil</span></div><div class="footer-column"><h2>Explore</h2><a href="#destinos">Destinos</a><a href="#experiencia">A experiência Retrato</a><a href="https://www.agenciaretrato.com/sobre" target="_blank" rel="noopener">Sobre a agência ↗</a><a href="https://www.agenciaretrato.com/retrato-news" target="_blank" rel="noopener">Retrato Journal ↗</a></div><div class="footer-column"><h2>Sua viagem</h2><a href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener">Planeje com a Retrato ↗</a><a href="https://viagens.meuagente.com/br/trips/" target="_blank" rel="noopener">Acesse sua viagem ↗</a><a href="https://www.agenciaretrato.com/retrato-chip" target="_blank" rel="noopener">Retrato Chip ↗</a><a href="https://www.agenciaretrato.com/retratonews/seguro-viagem-retrato-universal-assistance" target="_blank" rel="noopener">Seguro viagem ↗</a></div><div class="footer-column contact-column"><h2>Vamos nos conectar</h2><a href="mailto:contato@agenciaretrato.com">contato@agenciaretrato.com ↗</a><a href="https://www.agenciaretrato.com/instagram" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.agenciaretrato.com/canal" target="_blank" rel="noopener">Journal no WhatsApp ↗</a></div></div><div class="footer-bottom"><div><p>AGÊNCIA RETRATO VIAGENS E EXPERIÊNCIAS LTDA</p><p>CNPJ: 55.563.619/0001-04 · IATA | TIDS: 96195702</p></div><div class="legal-links"><a href="https://www.agenciaretrato.com/pol%C3%ADtica-de-privacidade" target="_blank" rel="noopener">Privacidade</a><a href="https://www.agenciaretrato.com/pol%C3%ADtica-de-cookies" target="_blank" rel="noopener">Cookies</a><a href="https://www.agenciaretrato.com/termos-e-condi%C3%A7%C3%B5es" target="_blank" rel="noopener">Termos e condições</a></div></div></footer>
+  <a class="contact-float" href="https://www.agenciaretrato.com/whatsapp" target="_blank" rel="noopener" aria-label="Planejar minha viagem com a Retrato no WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8 9 9 0 0 1-3.5-.7L4 20l1.2-4.5a8 8 0 1 1 14.8-4Z" stroke="currentColor" stroke-width="1.4"/><path d="M8.4 7.5c.2-.3.6-.3.8 0l1 2c.1.3-.2.7-.6 1 .5 1 1.3 1.8 2.3 2.3.3-.4.7-.7 1-.6l2 1c.3.2.3.6 0 .8-1.1 1.5-2.7 1.1-4.9-.6S6.9 9 8.4 7.5Z" fill="currentColor"/></svg><span>Vamos conversar</span></a>
+</body>
+</html>

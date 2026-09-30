@@ -1,0 +1,3 @@
+# Agência Retrato
+
+Página institucional em português brasileiro, com a composição da FTLO e identidade da Retrato. Hero fotográfico em tela cheia, navegação sobreposta, apresentação editorial com mosaico, diferenciais, seleção de destinos com filtros, processo em três etapas, conteúdo oficial e contato. Marca tipográfica agência (re)trato, títulos serifados, tons areia, preto e branco da referência original. Conteúdo fundamentado nas páginas oficiais; sem depoimentos, métricas ou tarifas inventadas. Destinos ligam a artigos oficiais, planejamento ao WhatsApp oficial e acesso de clientes ao portal existente. Layout responsivo e acessível, sem formulário que simule envio. Publicação privada para revisão.
