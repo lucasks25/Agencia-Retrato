@@ -37,3 +37,5 @@ A pedido do usuário, a seção final da home (E se a próxima viagem fosse a su
 As páginas de Sua viagem agora mantêm a mesma ação principal e alinhamento do cabeçalho da home. A remoção dessa ação foi restringida aos documentos legais. Teste de regressão confere o botão nas cinco rotas de serviço; alinhamento vertical e não quebra da ação são explícitos no CSS.
 
 Por correção explícita do usuário, os cinco cards de destinos voltaram às fotografias anteriores, sem substituição automática de seleção. O rodapé do hero não exibe botão de movimento nem o link O próximo capítulo começa aqui; o mar continua animado e respeita movimento reduzido sem depender da presença de controle visual.
+
+O hero de Sobre nós usa uma fotografia 4K de fachadas comerciais ao entardecer, sem pessoas, solicitada pelo usuário. A imagem de Dima/Unsplash é ilustrativa e não representa a sede da agência. A troca está restrita a esse hero.

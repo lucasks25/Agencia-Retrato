@@ -166,5 +166,21 @@
       2160
     ],
     "bytes": 2203155
+  },
+  {
+    "asset": "about-office-4k.webp",
+    "url": "https://images.unsplash.com/photo-1758022959319-5089f72d66cd?fm=webp&q=86&w=3840&h=2160&fit=crop",
+    "source": "https://unsplash.com/photos/modern-office-buildings-with-glass-facade-at-sunset-Kut10CROvqk",
+    "photographer": "Dima / dsk1306",
+    "location": "Atrium Tower, Berlim, Alemanha",
+    "native_size": [
+      4000,
+      6000
+    ],
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1813268
   }
 ]
