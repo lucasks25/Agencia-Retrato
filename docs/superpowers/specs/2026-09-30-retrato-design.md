@@ -8,3 +8,10 @@ O usuário confirmou a recriação de todas as páginas da Retrato e pediu exper
 
 ## Verificação
 Navegador local bloqueado por recusa de permissão. Não contornar. Conferir links, rotas, recursos e sintaxe, além da revisão estática independente. Revisão visual/interativa completa permanece pendente.
+
+## Ajustes solicitados após a publicação
+O usuário proibiu qualquer botão para o site antigo. A navegação gerada agora contém zero links para agenciaretrato.com: WhatsApp (11 3288-0015), Instagram e canal usam os endereços finais confirmados nos redirecionamentos públicos oficiais. Chip e seguro abrem uma consulta de atendimento; o Journal mantém apresentações editoriais locais sem botão para a publicação antiga. O portal externo do cliente permanece, pois é um serviço independente.
+
+Destinos tem um painel com cinco destinos, descrições, agrupamento Brasil/mundo e acesso por mouse, teclado e toque. O mar tem ondas mais perceptíveis, alternativa Canvas 2D quando WebGL falha, pausa e ativação manual quando movimento reduzido está habilitado. Quatro testes offline do controlador verificam alternativa, pausa, preferência e visibilidade; não substituem conferência visual.
+
+A seção de avaliações fica depois dos diferenciais e antes do planejamento, com o link Google fornecido pelo usuário. Não exibe nota, quantidade ou citações, pois a permissão salva do navegador bloqueia a leitura do perfil. Preencher apenas com dados efetivamente verificados ou fornecidos. A versão de scripts/estilos é identificada por hash para evitar reuso da animação anterior no cache.

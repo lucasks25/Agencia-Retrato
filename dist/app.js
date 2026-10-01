@@ -9,6 +9,7 @@ function setMenu(open) {
   document.querySelector('main').inert = open;
   document.querySelector('footer').inert = open;
   document.querySelector('.contact-float').inert = open;
+  if(!open){const destinations=mobileNav.querySelector('.mobile-destinations');if(destinations)destinations.open=false;}
 }
 menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
 mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
@@ -87,6 +88,7 @@ function renderPlanner() {
   if(plannerStep===2) {
     const summary=document.querySelector('#trip-summary');
     summary.textContent=makeTripSummary();
+    document.querySelector('.whatsapp-action').href='https://wa.me/551132880015?text='+encodeURIComponent(makeTripSummary());
     summary.setAttribute('tabindex','0');
     document.querySelector('#copy-status').textContent='';
   }
@@ -102,7 +104,7 @@ function openPlanner(destination='') {
   plannerDialog.showModal();
   document.querySelector('#trip-destination').focus();
 }
-document.querySelectorAll('a[href="https://www.agenciaretrato.com/whatsapp"]').forEach(link=>{
+document.querySelectorAll('a[href="https://wa.me/551132880015"]').forEach(link=>{
   if(link.classList.contains('contact-float') || link.classList.contains('whatsapp-action') || link.hasAttribute('data-direct-contact')) return;
   link.setAttribute('aria-haspopup','dialog');
   link.addEventListener('click',event=>{
@@ -140,13 +142,51 @@ document.querySelectorAll('[data-plan-vibe]').forEach(button=>button.addEventLis
   document.querySelectorAll('input[name="vibe"]').forEach(input=>{input.checked=input.value===value;});
   lastTrigger=button;openPlanner();
 }));
+document.querySelectorAll('[data-plan-service]').forEach(button=>button.addEventListener('click',()=>{
+  lastTrigger=button;openPlanner();
+  document.querySelector('#trip-notes').value='Gostaria de informações sobre '+button.dataset.planService+'.';
+}));
 document.querySelectorAll('a[data-local]').forEach(link=>link.removeAttribute('target'));
-document.querySelectorAll('.desktop-nav>a,.mobile-nav>a').forEach(link=>{
+document.querySelectorAll('.desktop-nav>a,.destinations-panel a,.mobile-nav a').forEach(link=>{
   if(new URL(link.href,location.href).pathname.replace(/\/$/,'')===location.pathname.replace(/\/$/,''))link.setAttribute('aria-current','page');
 });
 const servicesMenu=document.querySelector('.services-menu');
 document.addEventListener('click',event=>{if(servicesMenu && !servicesMenu.contains(event.target))servicesMenu.open=false;});
 document.addEventListener('keydown',event=>{if(event.key==='Escape' && servicesMenu?.open){servicesMenu.open=false;servicesMenu.querySelector('summary').focus();}});
+
+const destinationsMenu=document.querySelector('.destinations-menu');
+if(destinationsMenu){
+  const trigger=destinationsMenu.querySelector('.nav-disclosure');
+  const panel=destinationsMenu.querySelector('.destinations-panel');
+  let closeTimer=0;
+  function showDestinations(open){
+    clearTimeout(closeTimer);panel.hidden=!open;trigger.setAttribute('aria-expanded',String(open));
+    if(open&&servicesMenu)servicesMenu.open=false;
+  }
+  trigger.addEventListener('click',event=>{
+    const hoverClick=event.detail>0&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    showDestinations(hoverClick||panel.hidden);
+  });
+  trigger.addEventListener('keydown',event=>{
+    if(event.key==='ArrowDown'||event.key==='ArrowUp'){
+      event.preventDefault();showDestinations(true);
+      const links=panel.querySelectorAll('a');links[event.key==='ArrowDown'?0:links.length-1].focus();
+    }
+  });
+  destinationsMenu.addEventListener('pointerenter',event=>{if(event.pointerType!=='touch')showDestinations(true);});
+  destinationsMenu.addEventListener('pointerleave',()=>{
+    closeTimer=setTimeout(()=>{if(!destinationsMenu.contains(document.activeElement))showDestinations(false);},180);
+  });
+  destinationsMenu.addEventListener('focusout',event=>{if(!destinationsMenu.contains(event.relatedTarget))showDestinations(false);});
+  document.addEventListener('click',event=>{if(!destinationsMenu.contains(event.target))showDestinations(false);});
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&!panel.hidden){
+      event.preventDefault();showDestinations(false);trigger.focus();
+    }
+  });
+  servicesMenu?.addEventListener('toggle',()=>{if(servicesMenu.open)showDestinations(false);});
+  desktopWidth.addEventListener('change',()=>showDestinations(false));
+}
 
 const archive=document.querySelector('.archive');
 if(archive){
