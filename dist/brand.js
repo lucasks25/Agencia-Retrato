@@ -2,14 +2,8 @@
   const intro=document.querySelector('.brand-intro');
   const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
   if(!intro||preference.matches)return;
-  // The opening belongs to arrival, not to each stop in the navigation.
-  try {
-    if(window.sessionStorage.getItem('retrato-brand-intro-seen'))return;
-    window.sessionStorage.setItem('retrato-brand-intro-seen','1');
-  } catch {
-    // Storage restrictions must never prevent the page from opening.
-    return;
-  }
+  // Replay the signature on every homepage arrival, including reloads.
+  if(document.body?.classList.contains('inner-page'))return;
   let timer=0,openingTime=3850;
   function dismiss(){
     clearTimeout(timer);intro.hidden=true;

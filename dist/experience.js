@@ -9,7 +9,8 @@
     function selectExperience(index) {
       choices.forEach((choice, current) => {
         const active = current === index;
-        choice.setAttribute('aria-expanded', String(active));
+        choice.setAttribute('aria-selected', String(active));
+        choice.tabIndex = active ? 0 : -1;
         copies[current].hidden = !active;
         photos[current].classList.toggle('is-active', active);
       });
@@ -18,6 +19,14 @@
       choice.disabled = false;
       choice.addEventListener('click', () => selectExperience(index));
       choice.addEventListener('focus', () => selectExperience(index));
+      choice.addEventListener('keydown', event => {
+        let next;
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % choices.length;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index + choices.length - 1) % choices.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = choices.length - 1;
+        if (next !== undefined) {event.preventDefault();choices[next].focus();}
+      });
       choice.addEventListener('pointerenter', event => {
         if (event.pointerType === 'mouse') selectExperience(index);
       });

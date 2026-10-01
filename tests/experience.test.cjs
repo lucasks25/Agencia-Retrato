@@ -7,6 +7,7 @@ class Element {
   addEventListener(event,fn){this.events[event]=fn;}
   fire(event,args={}){this.events[event]?.(args);}
   setAttribute(key,value){this.attrs[key]=value;}
+  focus(){this.focused=true;this.fire('focus');}
 }
 function experience(){
   const buttons=Array.from({length:4},()=>new Element());
@@ -21,31 +22,37 @@ test('each travel detail selects its corresponding image and description on clic
  const {buttons,panels,photos}=experience();
  for(let index=0;index<4;index++){
   buttons[index].fire('click');
-  assert.equal(buttons[index].attrs['aria-expanded'],'true');
+  assert.equal(buttons[index].attrs['aria-selected'],'true');
   assert.equal(panels.filter(p=>!p.hidden).length,1);assert.equal(panels[index].hidden,false);
   assert.equal(photos.filter(p=>p.classList.values.has('is-active')).length,1);assert.ok(photos[index].classList.values.has('is-active'));
  }
 });
 test('mouse hover and keyboard focus select a detail; touch pointer entry does not',()=>{
  const {buttons}=experience();
- buttons[1].fire('pointerenter',{pointerType:'mouse'});assert.equal(buttons[1].attrs['aria-expanded'],'true');
- buttons[2].fire('pointerenter',{pointerType:'touch'});assert.equal(buttons[1].attrs['aria-expanded'],'true');
- buttons[3].fire('focus');assert.equal(buttons[3].attrs['aria-expanded'],'true');
+ buttons[1].fire('pointerenter',{pointerType:'mouse'});assert.equal(buttons[1].attrs['aria-selected'],'true');
+ buttons[2].fire('pointerenter',{pointerType:'touch'});assert.equal(buttons[1].attrs['aria-selected'],'true');
+ buttons[3].fire('focus');assert.equal(buttons[3].attrs['aria-selected'],'true');
 });
-function brand(storage){
+test('chapter controls support arrow keys, Home and End with roving keyboard focus',()=>{
+ const {buttons}=experience();
+ buttons[0].fire('keydown',{key:'ArrowRight',preventDefault(){}});
+ assert.equal(buttons[1].attrs['aria-selected'],'true');assert.equal(buttons[1].tabIndex,0);assert.ok(buttons[1].focused);
+ buttons[1].fire('keydown',{key:'End',preventDefault(){}});assert.equal(buttons[3].attrs['aria-selected'],'true');
+ buttons[3].fire('keydown',{key:'ArrowRight',preventDefault(){}});assert.equal(buttons[0].attrs['aria-selected'],'true');
+ buttons[2].fire('keydown',{key:'Home',preventDefault(){}});assert.equal(buttons[0].attrs['aria-selected'],'true');
+});
+function brand(internal=false){
  const intro={hidden:true,querySelector:()=>null};
- const document={querySelector:()=>intro,addEventListener(){},removeEventListener(){}};
- const window={sessionStorage:storage,matchMedia:()=>({matches:false,addEventListener(){}}),addEventListener(){}};
+ const document={body:{classList:{contains:()=>internal}},querySelector:()=>intro,addEventListener(){},removeEventListener(){}};
+ const window={matchMedia:()=>({matches:false,addEventListener(){}}),addEventListener(){}};
  vm.runInNewContext(fs.readFileSync('dist/brand.js','utf8'),{document,window,setTimeout(){},clearTimeout(){}});
  return intro;
 }
-test('the airplane opening is shown once per session across page loads',()=>{
- const values=new Map();const storage={getItem:k=>values.get(k),setItem:(k,v)=>values.set(k,v)};
- assert.equal(brand(storage).hidden,false);assert.equal(brand(storage).hidden,true);
+test('the airplane opening returns on each fresh homepage load or reload',()=>{
+ assert.equal(brand().hidden,false);assert.equal(brand().hidden,false);
 });
-test('unavailable session storage does not break the page',()=>{
- const storage={getItem(){throw Error('blocked');},setItem(){throw Error('blocked');}};
- assert.doesNotThrow(()=>brand(storage));
+test('internal navigation opens the page without the introductory curtain',()=>{
+ assert.equal(brand(true).hidden,true);
 });
 test('the plane crosses from outside the left edge to outside the right edge',()=>{
  const aircraft={style:{setProperty(){}}};const frame={getBoundingClientRect:()=>({width:440,height:240})};

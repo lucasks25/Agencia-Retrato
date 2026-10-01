@@ -140,44 +140,43 @@ body.dialog-open{overflow:hidden}dialog{padding:0;border:0;color:var(--ink);back
 .brand-flyby{width:112px}.brand-aircraft{fill:#887658;filter:none}.brand-contrail{width:75px;height:2px;clip-path:none;filter:none;background:linear-gradient(90deg,transparent,#88765838)}
 @media(max-width:760px){.brand-flyby{width:84px}.brand-contrail{width:50px}}
 
-/* The curatorial experience: one landscape, one intention at a time. */
-.experience{display:block;padding-top:76px;padding-bottom:80px;overflow:clip}
-.experience-heading{display:grid;grid-template-columns:1.12fr 1fr;align-items:end;gap:6vw;margin-bottom:44px}
-.experience-heading h2{font-size:clamp(2.8rem,4.5vw,4.6rem);margin-top:18px}
-.experience-intro{padding-bottom:5px;max-width:390px}
-.experience-intro>p{font-size:1rem;line-height:1.75;color:#c9cec5}
-.experience-intro .light-link{margin-top:19px;padding-bottom:8px;font-size:.9rem}
-.experience-curation{display:grid;grid-template-columns:1.12fr 1fr;gap:6vw;align-items:center}
-.experience-visual{position:relative;height:clamp(430px,36vw,550px);isolation:isolate;overflow:hidden;background:#323b32}
-.experience-scene{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .65s cubic-bezier(.22,1,.36,1);pointer-events:none}
+/* A panoramic chapter sequence, with photography as the entire atmosphere. */
+.experience.experience-panorama{display:block;position:relative;isolation:isolate;background:#182c28;color:#fbf7ee;overflow:clip;padding:0}
+.experience-landscapes,.experience-atmosphere{position:absolute;inset:0;pointer-events:none}
+.experience-landscapes{z-index:-2;overflow:hidden}
+.experience-scene{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .85s cubic-bezier(.22,1,.36,1)}
 .experience-scene.is-active{opacity:1;z-index:1}
-.experience-scene:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,#13241caa 100%)}
-.experience-scene img{width:100%;height:100%;object-fit:cover;transform:scale(1.025);transition:transform 1.15s cubic-bezier(.22,1,.36,1)}
+.experience-scene img{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.045);transition:transform 1.5s cubic-bezier(.22,1,.36,1)}
 .experience-scene.is-active img{transform:scale(1)}
-.experience-scene:nth-child(3) img{object-position:61% center}
-.experience-scene figcaption{position:absolute;z-index:2;bottom:32px;left:32px;right:26px;color:#fff}
-.experience-scene figcaption>span{display:block;font-size:.75rem;line-height:1.6;letter-spacing:.1em;margin-bottom:14px}
-.experience-scene figcaption em{display:block;font-family:var(--serif);font-size:clamp(2.25rem,3.3vw,3.5rem);line-height:1.06;font-weight:400;letter-spacing:-.02em}
-.experience-choice{border-top:1px solid #69736370;padding:0}
-.experience-choice:last-child{border-bottom:1px solid #69736370}
-.experience-choice h3{margin:0}
-.experience-choice button{display:grid;grid-template-columns:26px 1fr 17px;align-items:start;gap:19px;width:100%;padding:25px 0;color:#b8c0b3;background:transparent;border:0;text-align:left;transition:color .25s}
-.experience-choice button:disabled{cursor:default}
-.experience-choice button:hover,.experience-choice button[aria-expanded=true]{color:#f8f6ee}
-.experience-choice button>span:nth-child(2){font-family:var(--serif);font-size:clamp(1.8rem,2.3vw,2.5rem);line-height:1.13;letter-spacing:-.015em;font-weight:400}
-.experience-number{font-family:var(--sans);font-size:.875rem;line-height:1.5;padding-top:5px;color:#b7bba3}
-.experience-choice button i{position:relative;width:15px;height:15px;margin-top:9px;opacity:.75}
-.experience-choice button i:before,.experience-choice button i:after{content:'';position:absolute;background:currentColor;left:0;top:7px;width:15px;height:1px;transition:transform .25s}
-.experience-choice button i:after{transform:rotate(90deg)}
-.experience-choice button[aria-expanded=true] i:after{transform:rotate(0)}
-.experience-copy{padding:0 24px 25px 45px}
-.experience-copy p{font-size:1rem;line-height:1.7;color:#c5cbbf;max-width:430px}
-.experience.is-interactive .experience-copy{animation:experienceCopyIn .35s ease-out}
-@keyframes experienceCopyIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:1000px){.experience-heading,.experience-curation{gap:4vw}.experience-choice button{gap:13px;padding:22px 0}.experience-copy{padding-left:39px}.experience-visual{height:460px}}
-@media(max-width:760px){.experience{padding-top:55px;padding-bottom:58px}.experience-heading{grid-template-columns:1fr;gap:23px;margin-bottom:30px}.experience-heading h2{font-size:3.3rem}.experience-intro{max-width:480px}.experience-intro .light-link{margin-top:15px}.experience-curation{grid-template-columns:1fr;gap:25px}.experience-visual{height:330px}.experience-scene figcaption{left:23px;bottom:24px}.experience-scene figcaption em{font-size:2.75rem}.experience-choice button{padding:20px 0;gap:15px}.experience-choice button>span:nth-child(2){font-size:2rem}.experience-copy{padding-left:41px;padding-bottom:22px;max-width:550px}}
-@media(max-width:480px){.experience-heading h2{font-size:3rem}.experience-visual{height:280px}.experience-scene figcaption>span{font-size:.75rem;letter-spacing:.065em}.experience-scene figcaption em{font-size:2.3rem}.experience-choice button>span:nth-child(2){font-size:1.85rem}.experience-choice button{grid-template-columns:22px 1fr 15px;gap:12px}.experience-copy{padding-left:34px;padding-right:0}}
-@media(prefers-reduced-motion:reduce){.experience-scene,.experience-scene img,.experience-choice button,.experience-choice button i:before,.experience-choice button i:after{transition:none}.experience.is-interactive .experience-copy{animation:none}}
+.experience-scene:nth-child(3) img{object-position:65% center}
+.experience-atmosphere{z-index:-1;background:linear-gradient(90deg,#0b2524c4 0%,#0b252482 44%,#0b252420 100%),linear-gradient(180deg,#0a211f57 0%,transparent 32%,#0a211f26 60%,#0a211fdb 100%)}
+.experience-stage{position:relative;min-height:clamp(760px,91svh,1040px);padding:58px max(6.25vw,24px) 40px;display:flex;flex-direction:column;justify-content:space-between;gap:50px}
+.experience-masthead{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.experience-masthead>.text-link{margin:0;color:#f8f3e8;border-color:#e5e1d780;font-size:.9375rem;padding-bottom:10px;flex-shrink:0}
+.experience-masthead h2{font-family:var(--sans);font-size:1rem;line-height:1.6;letter-spacing:0;color:#e7e8df;margin-top:8px}
+.experience-masthead .eyebrow{font-size:.875rem;letter-spacing:.17em}
+.experience-panels{display:grid;gap:45px;margin:14px 0 20px}
+.experience-panorama.is-interactive .experience-panels{display:block;min-height:350px}
+.experience-panorama .experience-copy{padding:0;max-width:1100px}
+.experience-chapter{font-size:.8125rem;line-height:1.65;letter-spacing:.13em;color:#f2e6d0;margin-bottom:26px}
+.experience-copy h3{font-family:var(--serif);font-size:clamp(4.2rem,7.5vw,8.4rem);line-height:.98;letter-spacing:-.04em;font-weight:400;color:#fffaf1;max-width:100%;text-wrap:balance}
+.experience-copy h3 em{font-weight:400}
+.experience-description{margin-top:26px;max-width:465px;font-size:1.0625rem;line-height:1.85;color:#f3f2e8}
+.experience-panorama.is-interactive .experience-copy{animation:experienceChapterIn .65s cubic-bezier(.22,1,.36,1)}
+.experience-chapters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px}
+.experience-chapters button{position:relative;display:flex;align-items:baseline;gap:18px;width:100%;padding:24px 0 4px;border:0;border-top:1px solid #eeeddf57;background:none;text-align:left;color:#d4d9ce;transition:color .25s}
+.experience-chapters button:before{content:'';height:2px;position:absolute;left:0;top:-1px;right:0;background:#eed5ad;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.experience-chapters button[aria-selected=true]:before{transform:scaleX(1)}
+.experience-chapters button[aria-selected=true],.experience-chapters button:hover{color:#fffbef}
+.experience-chapters button>span:last-child{font-family:var(--serif);font-size:1.7rem;line-height:1.25;font-weight:400}
+.experience-chapters .experience-number{font-size:.8125rem;font-family:var(--sans);letter-spacing:.05em;color:#e3d1b2}
+.experience-chapters button:disabled{cursor:default}
+.experience-chapters button:focus-visible,.experience-copy:focus-visible{outline:2px solid #edcd96;outline-offset:8px}
+@keyframes experienceChapterIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1000px){.experience-stage{min-height:780px;padding-top:46px;padding-bottom:36px;gap:40px}.experience-panorama.is-interactive .experience-panels{min-height:330px}.experience-chapters{gap:20px}.experience-chapters button{gap:12px}.experience-chapters button>span:last-child{font-size:1.45rem}.experience-copy h3{font-size:clamp(4.2rem,8.8vw,6.5rem)}}
+@media(max-width:760px){.experience-stage{min-height:780px;padding:38px 24px 30px;gap:45px}.experience-masthead{flex-direction:column;gap:18px}.experience-masthead .eyebrow{font-size:.8125rem}.experience-masthead h2{font-size:.9375rem}.experience-masthead>.text-link{font-size:.875rem;padding-bottom:7px}.experience-panels{margin:5px 0 0}.experience-panorama.is-interactive .experience-panels{min-height:305px}.experience-copy h3{font-size:clamp(3.5rem,9.4vw,5rem);line-height:1.02;letter-spacing:-.035em}.experience-chapter{font-size:.75rem;letter-spacing:.08em;max-width:300px;margin-bottom:22px}.experience-description{font-size:1rem;line-height:1.8;max-width:390px;margin-top:23px}.experience-chapters{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 24px}.experience-chapters button{padding:15px 0 2px;gap:14px}.experience-chapters button>span:last-child{font-size:1.45rem}.experience-atmosphere{background:linear-gradient(90deg,#0b2524b8,#0b252453),linear-gradient(180deg,#0a211f75 0%,#0a211f14 35%,#0a211f80 65%,#0a211feb 100%)}.experience-scene:nth-child(3) img{object-position:70% center}}
+@media(max-width:480px){.experience-stage{min-height:760px}.experience-copy h3{font-size:clamp(3rem,10.5vw,4.3rem)}.experience-panorama.is-interactive .experience-panels{min-height:290px}.experience-chapters button>span:last-child{font-size:1.4rem}}
+@media(prefers-reduced-motion:reduce){.experience-scene,.experience-scene img,.experience-chapters button,.experience-chapters button:before{transition:none}.experience-panorama.is-interactive .experience-copy{animation:none}}
 
 /* A welcoming doorway into the existing traveler portal. */
 .client-hero{height:auto;min-height:740px;padding-top:150px;padding-bottom:75px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.85fr);gap:6vw;align-items:center}
