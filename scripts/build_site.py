@@ -53,7 +53,7 @@ def root_assets(html):
     return re.sub(r'(href|src)="(assets/[^\"]*|styles\.css|app\.js|ocean\.js|experience\.js|navigation\.js|brand\.js)"',lambda m:m.group(1)+'="/'+m.group(2)+('?v='+versions[m.group(2)] if m.group(2) in versions else '')+'"',html)
 def clean_interface(html,quiet=False):
     for old,(new,alt) in LANDSCAPES.items():
-        html=re.sub(r'<img\b[^>]*src="/?assets/'+re.escape(old)+r'"[^>]*>',lambda m:re.sub(r'alt="[^"]*"','alt="'+h(alt)+'"',m.group(0).replace(old,new)),html)
+        html=re.sub(r'<img\b[^>]*src="/?assets/'+re.escape(old)+r'"[^>]*>',lambda m:m.group(0) if 'data-preserve-photo' in m.group(0) else re.sub(r'alt="[^"]*"','alt="'+h(alt)+'"',m.group(0).replace(old,new)),html)
     html=re.sub(r'(<body[^>]*>)',r'\1'+BRAND_INTRO,html,count=1)
     html=re.sub(r'<span(?: [^>]*)?>↗</span>','',html)
     html=html.replace(' ↗','').replace('↗','')
