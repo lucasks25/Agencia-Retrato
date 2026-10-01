@@ -51,3 +51,5 @@ Por ajuste do usuário, o avião agora faz uma volta elíptica completa em torno
 A linha inferior do cabeçalho foi removida quando ele está transparente sobre fotos; o cabeçalho opaco após rolagem mantém sua separação.
 
 O voo agora calcula uma volta completa em torno da marca e continua pela mesma tangente em uma curva de saída para além do canto superior direito da tela. O fim do percurso usa as dimensões reais da janela; não desaparece antecipadamente. A abertura dura aproximadamente 3,45 segundos. Avião metálico refinado, detalhes dourados nas asas e entradas dos motores, com rastro leve crescente na saída.
+
+A pedido do usuário, o avião voltou a ser uma silhueta simples dourada, sem motores, janelas, gradientes metálicos ou sombra. O motion path usa velocidade linear contínua, removendo a pausa involuntária na junção entre órbita e saída. A duração se adapta ao comprimento do trajeto para manter velocidade natural em diferentes telas; a cortina só sai após o avião estar fora da janela.

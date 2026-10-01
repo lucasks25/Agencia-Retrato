@@ -2,7 +2,7 @@
   const intro=document.querySelector('.brand-intro');
   const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
   if(!intro||preference.matches)return;
-  let timer=0;
+  let timer=0,openingTime=3850;
   function dismiss(){
     clearTimeout(timer);intro.hidden=true;
     document.removeEventListener('pointerdown',dismiss,true);
@@ -26,11 +26,14 @@
       const point={x:3*u*u*t*rx*.8+3*u*t*t*endX*.7+t*t*t*endX,y:-u*u*u*ry-3*u*u*t*ry+3*u*t*t*endY*.8+t*t*t*endY};
       departure+=Math.hypot(point.x-previous.x,point.y-previous.y);previous=point;
     }
-    aircraft.style.setProperty('--brand-orbit-end',`${orbit/(orbit+departure)*100}%`);
+    const flightSeconds=Math.max(2.8,Math.min(4.2,(orbit+departure)/650));
+    aircraft.style.setProperty('--brand-flight-duration',`${flightSeconds}s`);
+    intro.style.setProperty('--brand-opening-duration',`${flightSeconds+.75}s`);
+    openingTime=(flightSeconds+.8)*1000;
   }
   document.addEventListener('pointerdown',dismiss,true);
   document.addEventListener('keydown',dismiss,true);
   preference.addEventListener('change',dismiss);
   window.addEventListener('pageshow',event=>{if(event.persisted)dismiss();});
-  timer=setTimeout(dismiss,3450);
+  timer=setTimeout(dismiss,openingTime);
 })();
