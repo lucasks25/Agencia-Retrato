@@ -2,6 +2,14 @@
   const intro=document.querySelector('.brand-intro');
   const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
   if(!intro||preference.matches)return;
+  // The opening belongs to arrival, not to each stop in the navigation.
+  try {
+    if(window.sessionStorage.getItem('retrato-brand-intro-seen'))return;
+    window.sessionStorage.setItem('retrato-brand-intro-seen','1');
+  } catch {
+    // Storage restrictions must never prevent the page from opening.
+    return;
+  }
   let timer=0,openingTime=3850;
   function dismiss(){
     clearTimeout(timer);intro.hidden=true;
@@ -10,23 +18,13 @@
   }
   intro.hidden=false;
   const aircraft=intro.querySelector('.brand-flyby');
-  const frame=intro.querySelector('.brand-intro-frame');
-  if(aircraft&&frame){
-    const rect=frame.getBoundingClientRect();
-    const rx=Math.min(rect.width/2+35,window.innerWidth/2-55);
-    const ry=rect.height/2+30,k=.55228475;
-    const endX=window.innerWidth/2+180,endY=-window.innerHeight/2-150;
-    const path=`M 0 ${-ry} C ${rx*k} ${-ry} ${rx} ${-ry*k} ${rx} 0 C ${rx} ${ry*k} ${rx*k} ${ry} 0 ${ry} C ${-rx*k} ${ry} ${-rx} ${ry*k} ${-rx} 0 C ${-rx} ${-ry*k} ${-rx*k} ${-ry} 0 ${-ry} C ${rx*.8} ${-ry} ${endX*.7} ${endY*.8} ${endX} ${endY}`;
-    aircraft.style.offsetPath=`path("${path}")`;
-    const h=((rx-ry)/(rx+ry))**2;
-    const orbit=Math.PI*(rx+ry)*(1+3*h/(10+Math.sqrt(4-3*h)));
-    let departure=0,previous={x:0,y:-ry};
-    for(let i=1;i<=40;i++){
-      const t=i/40,u=1-t;
-      const point={x:3*u*u*t*rx*.8+3*u*t*t*endX*.7+t*t*t*endX,y:-u*u*u*ry-3*u*u*t*ry+3*u*t*t*endY*.8+t*t*t*endY};
-      departure+=Math.hypot(point.x-previous.x,point.y-previous.y);previous=point;
-    }
-    const flightSeconds=Math.max(2.8,Math.min(4.2,(orbit+departure)/650));
+  if(aircraft){
+    const startX=-window.innerWidth/2-160;
+    const endX=window.innerWidth/2+160;
+    const startY=30,endY=-35;
+    aircraft.style.offsetPath=`path("M ${startX} ${startY} L ${endX} ${endY}")`;
+    const distance=Math.hypot(endX-startX,endY-startY);
+    const flightSeconds=Math.max(2.8,Math.min(4.2,distance/600));
     aircraft.style.setProperty('--brand-flight-duration',`${flightSeconds}s`);
     intro.style.setProperty('--brand-opening-duration',`${flightSeconds+.75}s`);
     openingTime=(flightSeconds+.8)*1000;

@@ -1,6 +1,30 @@
 /* Deliberate service choices and customer stories, with native HTML fallbacks. */
 (() => {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const gallery = document.querySelector('[data-experience-gallery]');
+  if (gallery) {
+    const choices = [...gallery.querySelectorAll('[data-experience-choice]')];
+    const copies = [...gallery.querySelectorAll('[data-experience-copy]')];
+    const photos = [...gallery.querySelectorAll('[data-experience-photo]')];
+    function selectExperience(index) {
+      choices.forEach((choice, current) => {
+        const active = current === index;
+        choice.setAttribute('aria-expanded', String(active));
+        copies[current].hidden = !active;
+        photos[current].classList.toggle('is-active', active);
+      });
+    }
+    choices.forEach((choice, index) => {
+      choice.disabled = false;
+      choice.addEventListener('click', () => selectExperience(index));
+      choice.addEventListener('focus', () => selectExperience(index));
+      choice.addEventListener('pointerenter', event => {
+        if (event.pointerType === 'mouse') selectExperience(index);
+      });
+    });
+    selectExperience(0);
+    gallery.classList.add('is-interactive');
+  }
   const track = document.querySelector('.reviews-track');
   if (track) {
     const controls = document.querySelector('.reviews-controls');
@@ -53,7 +77,8 @@
       opener?.focus({preventScroll:true});
     });
   }
-  document.querySelectorAll('.chip-tabs').forEach(tablist => {
+  document.querySelectorAll('.chip-tabs, .client-tabs').forEach(tablist => {
+    tablist.hidden = false;
     const tabs = [...tablist.querySelectorAll('[role=tab]')];
     function select(tab, focus = false) {
       tabs.forEach(item => {
