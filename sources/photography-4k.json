@@ -182,5 +182,53 @@
       2160
     ],
     "bytes": 1813268
+  },
+  {
+    "asset": "experience-hotel-4k.webp",
+    "url": "https://images.pexels.com/photos/5461582/pexels-photo-5461582.jpeg?cs=srgb&fm=jpg",
+    "source": "https://www.pexels.com/photo/bed-and-pillows-in-a-hotel-room-5461582/",
+    "photographer": "Amelia Hallsworth",
+    "theme": "Hotelaria",
+    "native_size": [
+      6016,
+      4016
+    ],
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1728712
+  },
+  {
+    "asset": "experience-flight-4k.webp",
+    "url": "https://images.unsplash.com/photo-1576913507776-b742367a4716",
+    "source": "https://unsplash.com/photos/a-view-of-the-sunset-from-an-airplane-window-hf5CR8mxKKg",
+    "photographer": "Nikola Gladovic",
+    "theme": "Conexões",
+    "native_size": [
+      4083,
+      6121
+    ],
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 576362
+  },
+  {
+    "asset": "experience-care-4k.webp",
+    "url": "https://images.pexels.com/photos/6466292/pexels-photo-6466292.jpeg?cs=srgb&fm=jpg",
+    "source": "https://www.pexels.com/photo/server-pouring-hot-drink-6466292/",
+    "photographer": "cottonbro studio",
+    "theme": "Proximidade",
+    "native_size": [
+      6720,
+      4480
+    ],
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 406350
   }
 ]

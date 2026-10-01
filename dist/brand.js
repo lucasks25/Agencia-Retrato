@@ -15,8 +15,9 @@
   if(aircraft){
     const startX=-window.innerWidth/2-160;
     const endX=window.innerWidth/2+160;
-    const startY=30,endY=-35;
-    aircraft.style.offsetPath=`path("M ${startX} ${startY} L ${endX} ${endY}")`;
+    const startY=60,endY=-70;
+    const control1X=startX*.36,control2X=endX*.28;
+    aircraft.style.offsetPath=`path("M ${startX} ${startY} C ${control1X} 15 ${control2X} -110 ${endX} ${endY}")`;
     const distance=Math.hypot(endX-startX,endY-startY);
     const flightSeconds=Math.max(2.8,Math.min(4.2,distance/600));
     aircraft.style.setProperty('--brand-flight-duration',`${flightSeconds}s`);

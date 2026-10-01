@@ -61,7 +61,22 @@ test('the plane crosses from outside the left edge to outside the right edge',()
  const window={innerWidth:1440,innerHeight:900,sessionStorage:{getItem(){},setItem(){}},matchMedia:()=>({matches:false,addEventListener(){}}),addEventListener(){}};
  vm.runInNewContext(fs.readFileSync('dist/brand.js','utf8'),{document,window,setTimeout(){},clearTimeout(){}});
  const path=aircraft.style.offsetPath;
- const straight=path.match(/^path\("M ([-\d.]+) ([-\d.]+) L ([-\d.]+) ([-\d.]+)"\)$/);
- assert.ok(straight,'a single uninterrupted flight replaces the loop');
- assert.ok(Number(straight[1]) < -window.innerWidth/2);assert.ok(Number(straight[3]) > window.innerWidth/2);
+ const curve=path.match(/^path\("M ([-\d.]+) ([-\d.]+) C ([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+)"\)$/);
+ assert.ok(curve,'the flight follows one continuous curve');
+ const [sx,sy,c1x,c1y,c2x,c2y,ex,ey]=curve.slice(1).map(Number);
+ assert.ok(sx < -window.innerWidth/2);assert.ok(ex > window.innerWidth/2);
+ let previousX=sx,previousAngle;
+ for(let step=0;step<=40;step++){
+  const t=step/40,u=1-t;
+  const x=u*u*u*sx+3*u*u*t*c1x+3*u*t*t*c2x+t*t*t*ex;
+  const y=u*u*u*sy+3*u*u*t*c1y+3*u*t*t*c2y+t*t*t*ey;
+  const dx=3*u*u*(c1x-sx)+6*u*t*(c2x-c1x)+3*t*t*(ex-c2x);
+  const dy=3*u*u*(c1y-sy)+6*u*t*(c2y-c1y)+3*t*t*(ey-c2y);
+  const angle=Math.atan2(dy,dx);
+  assert.ok(x>=previousX,'the plane must never turn back');
+  assert.ok(Math.abs(y)<130,'the bend must remain subtle');
+  if(previousAngle!==undefined)assert.ok(Math.abs(angle-previousAngle)<.05,'heading must change gently');
+  previousX=x;previousAngle=angle;
+ }
+
 });
