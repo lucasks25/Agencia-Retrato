@@ -1,0 +1,70 @@
+{
+  "source": "https://www.agenciaretrato.com/retrato-chip",
+  "verified_on": "2026-09-30",
+  "currency": "BRL",
+  "regions": [
+    {
+      "id": "usa",
+      "label": "Estados Unidos",
+      "plans": [
+        {
+          "gb": 10,
+          "brl": 109,
+          "validity_days": 30
+        },
+        {
+          "gb": 20,
+          "brl": 179,
+          "validity_days": 30
+        },
+        {
+          "gb": 50,
+          "brl": 249,
+          "validity_days": 30
+        }
+      ]
+    },
+    {
+      "id": "europa",
+      "label": "Europa",
+      "plans": [
+        {
+          "gb": 10,
+          "brl": 149,
+          "validity_days": 30
+        },
+        {
+          "gb": 20,
+          "brl": 229,
+          "validity_days": 30
+        },
+        {
+          "gb": 50,
+          "brl": 399,
+          "validity_days": 30
+        }
+      ]
+    },
+    {
+      "id": "mundo",
+      "label": "Mundo",
+      "plans": [
+        {
+          "gb": 10,
+          "brl": 449,
+          "validity_days": 30
+        },
+        {
+          "gb": 20,
+          "brl": 749,
+          "validity_days": 30
+        },
+        {
+          "gb": 50,
+          "brl": 1099,
+          "validity_days": 30
+        }
+      ]
+    }
+  ]
+}

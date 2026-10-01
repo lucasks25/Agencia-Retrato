@@ -6,7 +6,7 @@ const vm=require('node:vm');
 // Offline controller tests: graphics and DOM boundaries are explicit adapters.
 // These do not open a browser or claim to verify the rendered appearance.
 function scene({reduced=false}={}) {
-  const frames=new Map(), canvases=[], draws=[];
+  const frames=new Map(), canvases=[], draws=[],maskRects=[];
   let nextFrame=0;
   function element() {
     const listeners={},attributes={};
@@ -25,7 +25,7 @@ function scene({reduced=false}={}) {
     assert.equal(tag,'canvas');
     const canvas=element();
     const context={clearRect(){},save(){},restore(){},setTransform(){},
-      drawImage(...args){draws.push({canvas,args});},fillRect(){},
+      drawImage(...args){draws.push({canvas,args});},fillRect(x,y,width,height){maskRects.push({x,y,width,height});},
       createLinearGradient(){return {addColorStop(){}};}};
     canvas.getContext=kind=>kind==='2d'?context:null;
     canvases.push(canvas);return canvas;
@@ -38,7 +38,7 @@ function scene({reduced=false}={}) {
   };
   vm.runInNewContext(readFileSync(require.resolve('../dist/ocean.js'),'utf8'),sandbox);
   function advance(now){const queued=[...frames.values()];frames.clear();for(const fn of queued)fn(now);}
-  return {control,document,preference,frames,draws,canvases,advance};
+  return {control,document,preference,frames,draws,canvases,maskRects,advance};
 }
 
 test('unavailable WebGL still produces animated sea frames through Canvas 2D',()=>{
@@ -79,4 +79,31 @@ test('a hidden page suspends frames and visibility resumes them',()=>{
   assert.equal(s.frames.size,0);
   s.document.hidden=false;s.document.emit('visibilitychange');
   assert.ok(s.frames.size>0);
+});
+
+test('the sea mask reaches the water beside the middle coastal rocks',()=>{
+  const s=scene();
+  // In the source photograph, water at y=720 extends to approximately x=850.
+  // With this hand-checked 1440 × 900 crop, that area extends past screen x=700.
+  const band=s.maskRects.find(rect=>rect.y===690);
+  assert.ok(band.width>=700,'the coastal inlet must not remain outside the animation');
+  assert.ok(band.width<760,'the nearby wall and rocks must remain outside the water mask');
+});
+
+test('the sea mask retreats around the foreground rocks',()=>{
+  const s=scene();
+  const band=s.maskRects.find(rect=>rect.y===898);
+  assert.ok(band.width<530,'foreground rocks must not be displaced as water');
+});
+
+test('the water displacement stays subtle throughout an animation cycle',()=>{
+  const s=scene();
+  for(let time=100;time<=8000;time+=50)s.advance(time);
+  const bands=s.draws.filter(x=>x.canvas.attached&&x.args.length===9);
+  assert.ok(bands.length>0);
+  for(const {args} of bands){
+    const sourceY=args[2],destinationY=args[6];
+    const originalY=destinationY/900*941;
+    assert.ok(Math.abs(sourceY-originalY)<=1.65,'water must drift less than two source pixels');
+  }
 });

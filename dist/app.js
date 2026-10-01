@@ -8,7 +8,8 @@ function setMenu(open) {
   document.body.classList.toggle('menu-open', open);
   document.querySelector('main').inert = open;
   document.querySelector('footer').inert = open;
-  document.querySelector('.contact-float').inert = open;
+  const floatingContact = document.querySelector('.contact-float');
+  if (floatingContact) floatingContact.inert = open;
   if(!open){const destinations=mobileNav.querySelector('.mobile-destinations');if(destinations)destinations.open=false;}
 }
 menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
