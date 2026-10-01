@@ -22,8 +22,11 @@ document.addEventListener('keydown', event => {
 });
 const desktopWidth = window.matchMedia('(min-width: 1001px)');
 desktopWidth.addEventListener('change', event => { if (event.matches) setMenu(false); });
-function updateHeader() { header.classList.toggle('scrolled', (document.body.classList.contains('inner-page') && !document.body.classList.contains('photo-page')) || window.scrollY > 50); }
-window.addEventListener('scroll', updateHeader, {passive:true});
+let headerScrolled;
+function updateHeader(y=window.scrollY) {
+  const scrolled=(document.body.classList.contains('inner-page') && !document.body.classList.contains('photo-page')) || y > 50;
+  if(scrolled!==headerScrolled){header.classList.toggle('scrolled',scrolled);headerScrolled=scrolled;}
+}
 updateHeader();
 const cards = [...document.querySelectorAll('.destination-card')];
 document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => {
@@ -193,15 +196,34 @@ if(!reduceMotion.matches && 'IntersectionObserver' in window){
 }
 const readingProgress=document.createElement('div');readingProgress.className='reading-progress';readingProgress.setAttribute('aria-hidden','true');document.body.append(readingProgress);
 const heroImage=document.querySelector('.hero-image,.destination-hero>img,.photo-heading>img');
-let scrollFrame=0;
-function updateMotion(){
-  const scrollMax=document.documentElement.scrollHeight-window.innerHeight;
-  readingProgress.style.transform=`scaleX(${scrollMax>0?Math.min(1,window.scrollY/scrollMax):0})`;
-  if(heroImage&&!heroImage.closest('.has-water-motion')&&!reduceMotion.matches&&window.innerWidth>760&&window.scrollY<window.innerHeight*1.5){heroImage.style.translate=`0 ${Math.min(window.scrollY*.14,110)}px`;}
-  scrollFrame=0;
+let scrollFrame=0,scrollMax=0,viewportHeight=0,viewportWidth=0,heroInView=true,lastProgress=-1,lastParallax;
+function measureMotion(){
+  viewportHeight=window.innerHeight;viewportWidth=window.innerWidth;
+  scrollMax=Math.max(0,document.documentElement.scrollHeight-viewportHeight);
+  scheduleMotion();
 }
-window.addEventListener('scroll',()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(updateMotion);},{passive:true});
-updateMotion();
+function updateMotion(){
+  scrollFrame=0;
+  const y=Math.max(0,window.scrollY);
+  const progress=scrollMax>0?Math.min(1,y/scrollMax):0;
+  if(progress!==lastProgress){readingProgress.style.transform=`scaleX(${progress})`;lastProgress=progress;}
+  updateHeader(y);
+  if(heroImage){
+    const parallax=!heroImage.closest('.has-water-motion')&&!reduceMotion.matches&&viewportWidth>760;
+    if(parallax!==lastParallax){heroImage.classList.toggle('has-scroll-parallax',parallax);lastParallax=parallax;}
+    if(parallax&&heroInView)heroImage.style.translate=`0 ${Math.min(y*.035,24)}px`;
+    else if(!parallax)heroImage.style.translate='0 0';
+  }
+}
+function scheduleMotion(){if(!scrollFrame)scrollFrame=requestAnimationFrame(updateMotion);}
+window.addEventListener('scroll',scheduleMotion,{passive:true});
+window.addEventListener('resize',measureMotion,{passive:true});
+window.addEventListener('pageshow',measureMotion);
+reduceMotion.addEventListener('change',scheduleMotion);
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(measureMotion).observe(document.body);
+else window.addEventListener('load',measureMotion,{once:true});
+if(heroImage&&'IntersectionObserver' in window)new IntersectionObserver(([entry])=>{heroInView=entry.isIntersecting;scheduleMotion();}).observe(heroImage);
+measureMotion();
 const destinationSticky=document.querySelector('.destination-sticky');
 if(destinationSticky && 'IntersectionObserver' in window){
   const hero=document.querySelector('.destination-hero');
