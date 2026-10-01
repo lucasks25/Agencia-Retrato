@@ -22,7 +22,7 @@ document.addEventListener('keydown', event => {
 });
 const desktopWidth = window.matchMedia('(min-width: 1001px)');
 desktopWidth.addEventListener('change', event => { if (event.matches) setMenu(false); });
-function updateHeader() { header.classList.toggle('scrolled', document.body.classList.contains('inner-page') || window.scrollY > 50); }
+function updateHeader() { header.classList.toggle('scrolled', (document.body.classList.contains('inner-page') && !document.body.classList.contains('photo-page')) || window.scrollY > 50); }
 window.addEventListener('scroll', updateHeader, {passive:true});
 updateHeader();
 const cards = [...document.querySelectorAll('.destination-card')];
@@ -148,47 +148,9 @@ document.querySelectorAll('[data-plan-service]').forEach(button=>button.addEvent
   document.querySelector('#trip-notes').value='Gostaria de informações sobre '+button.dataset.planService+'.';
 }));
 document.querySelectorAll('a[data-local]').forEach(link=>link.removeAttribute('target'));
-document.querySelectorAll('.desktop-nav>a,.destinations-panel a,.mobile-nav a').forEach(link=>{
+document.querySelectorAll('.desktop-nav>a,.nav-panel a,.mobile-nav a').forEach(link=>{
   if(new URL(link.href,location.href).pathname.replace(/\/$/,'')===location.pathname.replace(/\/$/,''))link.setAttribute('aria-current','page');
 });
-const servicesMenu=document.querySelector('.services-menu');
-document.addEventListener('click',event=>{if(servicesMenu && !servicesMenu.contains(event.target))servicesMenu.open=false;});
-document.addEventListener('keydown',event=>{if(event.key==='Escape' && servicesMenu?.open){servicesMenu.open=false;servicesMenu.querySelector('summary').focus();}});
-
-const destinationsMenu=document.querySelector('.destinations-menu');
-if(destinationsMenu){
-  const trigger=destinationsMenu.querySelector('.nav-disclosure');
-  const panel=destinationsMenu.querySelector('.destinations-panel');
-  let closeTimer=0;
-  function showDestinations(open){
-    clearTimeout(closeTimer);panel.hidden=!open;trigger.setAttribute('aria-expanded',String(open));
-    if(open&&servicesMenu)servicesMenu.open=false;
-  }
-  trigger.addEventListener('click',event=>{
-    const hoverClick=event.detail>0&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    showDestinations(hoverClick||panel.hidden);
-  });
-  trigger.addEventListener('keydown',event=>{
-    if(event.key==='ArrowDown'||event.key==='ArrowUp'){
-      event.preventDefault();showDestinations(true);
-      const links=panel.querySelectorAll('a');links[event.key==='ArrowDown'?0:links.length-1].focus();
-    }
-  });
-  destinationsMenu.addEventListener('pointerenter',event=>{if(event.pointerType!=='touch')showDestinations(true);});
-  destinationsMenu.addEventListener('pointerleave',()=>{
-    closeTimer=setTimeout(()=>{if(!destinationsMenu.contains(document.activeElement))showDestinations(false);},180);
-  });
-  destinationsMenu.addEventListener('focusout',event=>{if(!destinationsMenu.contains(event.relatedTarget))showDestinations(false);});
-  document.addEventListener('click',event=>{if(!destinationsMenu.contains(event.target))showDestinations(false);});
-  document.addEventListener('keydown',event=>{
-    if(event.key==='Escape'&&!panel.hidden){
-      event.preventDefault();showDestinations(false);trigger.focus();
-    }
-  });
-  servicesMenu?.addEventListener('toggle',()=>{if(servicesMenu.open)showDestinations(false);});
-  desktopWidth.addEventListener('change',()=>showDestinations(false));
-}
-
 const archive=document.querySelector('.archive');
 if(archive){
   const search=document.querySelector('#journal-search');
@@ -230,7 +192,7 @@ if(!reduceMotion.matches && 'IntersectionObserver' in window){
   reduceMotion.addEventListener('change',event=>{if(event.matches){revealTargets.forEach(element=>element.classList.add('is-visible'));observer.disconnect();}});
 }
 const readingProgress=document.createElement('div');readingProgress.className='reading-progress';readingProgress.setAttribute('aria-hidden','true');document.body.append(readingProgress);
-const heroImage=document.querySelector('.hero-image,.destination-hero>img');
+const heroImage=document.querySelector('.hero-image,.destination-hero>img,.photo-heading>img');
 let scrollFrame=0;
 function updateMotion(){
   const scrollMax=document.documentElement.scrollHeight-window.innerHeight;

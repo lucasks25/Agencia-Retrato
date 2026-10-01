@@ -1,0 +1,170 @@
+[
+  {
+    "asset": "landscape-como-4k.webp",
+    "url": "https://images.unsplash.com/photo-1766267163372-9dfbe3afe9ea?fm=webp&q=86&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 687358,
+    "source": "https://unsplash.com/photos/mountain-landscape-with-a-lake-at-sunrise-agaatGoOIlQ",
+    "photographer": "Cosmin Andrei Buzamat",
+    "location": "Lago de Como, Itália",
+    "native_size": [
+      8064,
+      6048
+    ]
+  },
+  {
+    "asset": "landscape-rio-4k.webp",
+    "url": "https://images.unsplash.com/photo-1742227136407-39a2d9262419?fm=webp&q=86&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 2768086,
+    "source": "https://unsplash.com/photos/aerial-view-of-rio-de-janeiro-cityscape-and-mountains-LNcu4-_lpFw",
+    "photographer": "Felipe Coelho",
+    "location": "Rio de Janeiro, Brasil",
+    "native_size": [
+      8064,
+      4536
+    ]
+  },
+  {
+    "asset": "landscape-resort-4k.webp",
+    "url": "https://images.unsplash.com/photo-1776762893024-890728937eab?fm=webp&q=86&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1906464,
+    "source": "https://unsplash.com/photos/aerial-view-of-luxury-villas-by-the-ocean-and-beach-zzu3eaYzuWI",
+    "photographer": "Antonio Araujo",
+    "location": "Tailândia",
+    "native_size": [
+      5347,
+      3565
+    ]
+  },
+  {
+    "asset": "landscape-lencois-4k.webp",
+    "url": "https://images.unsplash.com/photo-1650623598032-4fddce25b34f?fm=webp&q=86&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1632426,
+    "source": "https://unsplash.com/photos/a-sandy-beach-with-a-body-of-water-in-the-background-with-lencois-maranhenses-national-park-in-the-background-lpv2x4ZQETQ",
+    "photographer": "gabriel xu",
+    "location": "Lençóis Maranhenses, Brasil"
+  },
+  {
+    "asset": "landscape-maldives-4k.webp",
+    "url": "https://images.unsplash.com/photo-1694786121274-29aa4b36e8d5?fm=webp&q=86&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1504416,
+    "source": "https://unsplash.com/photos/an-island-in-the-middle-of-the-ocean-1-ym0IUcuiU",
+    "photographer": "Ishan @seefromthesky",
+    "location": "Maldivas",
+    "native_size": [
+      3840,
+      4798
+    ]
+  },
+  {
+    "asset": "insurance-photo-4k.jpg",
+    "url": "https://images.pexels.com/photos/4173227/pexels-photo-4173227.jpeg?auto=compress&cs=tinysrgb&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1137808,
+    "source": "https://www.pexels.com/photo/excited-woman-with-luggage-in-airport-4173227/",
+    "photographer": "Gustavo Fring",
+    "location": "Viajante em aeroporto"
+  },
+  {
+    "asset": "landscape-villa-4k.jpg",
+    "url": "https://images.pexels.com/photos/19075385/pexels-photo-19075385.jpeg?auto=compress&cs=tinysrgb&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1680260,
+    "source": "https://www.pexels.com/photo/swimming-pool-of-a-holiday-home-overlookig-the-sea-19075385/",
+    "photographer": "Ahmet ÇÖTÜR",
+    "location": "Kaş, Turquia",
+    "native_size": [
+      6720,
+      4480
+    ]
+  },
+  {
+    "asset": "landscape-milagres-4k.jpg",
+    "url": "https://images.pexels.com/photos/36659159/pexels-photo-36659159.jpeg?auto=compress&cs=tinysrgb&w=3840&h=2160&fit=crop",
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1244913,
+    "source": "https://www.pexels.com/photo/scenic-beach-landscape-with-palm-trees-in-brazil-36659159/",
+    "photographer": "Mike Scott",
+    "location": "São Miguel dos Milagres, Alagoas, Brasil",
+    "native_size": [
+      8160,
+      4590
+    ]
+  },
+  {
+    "asset": "landscape-rome-4k.webp",
+    "url": "https://images.unsplash.com/photo-1765984990160-06ebd0e4555e?fm=webp&q=86&w=3840&h=2160&fit=crop",
+    "source": "https://unsplash.com/photos/rooftops-and-domes-of-rome-at-sunset-c84B8a-1heU",
+    "photographer": "The Quiet Atlas",
+    "location": "Roma, Itália",
+    "native_size": [
+      6000,
+      4000
+    ],
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 1233772
+  },
+  {
+    "asset": "landscape-prea-4k.jpg",
+    "url": "https://lucidcm.imgix.net/95182/Hotel/79008/Image/h4j2Q1zfE6WL4gaAZOjZA_DJI_20260307065306_0278_D.jpg?fm=jpg&q=86&w=3840&h=2160&fit=crop",
+    "source": "https://slh.com/hotels/casana-hotel",
+    "photographer": "Casana Hotel / Small Luxury Hotels of the World",
+    "location": "Praia do Preá, Ceará, Brasil",
+    "native_size": [
+      5245,
+      2947
+    ],
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 2167079
+  },
+  {
+    "asset": "casana-pool-4k.jpg",
+    "url": "https://lucidcm.imgix.net/95182/Hotel/79008/Image/F9J7gb4rY028XVNOhWhfLg_uh7-HDR.jpg?fm=jpg&q=86&w=3840&h=2160&fit=crop",
+    "source": "https://slh.com/hotels/casana-hotel",
+    "photographer": "Casana Hotel / Small Luxury Hotels of the World",
+    "location": "Casana Hotel, Praia do Preá",
+    "native_size": [
+      8391,
+      5595
+    ],
+    "size": [
+      3840,
+      2160
+    ],
+    "bytes": 2203155
+  }
+]

@@ -6,8 +6,14 @@
   const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
   let renderer=null,frame=0,lastTime=0,lastDraw=0,elapsed=0,inView=true,userChoice=null;
   const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);};
-  // Trace the actual water/rock boundary in the unchanged 1672 × 941 photograph.
-  const shoreline=[[557,800],[582,774],[604,761],[620,727],[640,675],[649,653],[666,686],[681,691],[689,735],[701,866],[723,858],[738,830],[753,809],[771,813],[790,784],[807,750],[826,740],[842,724],[866,706],[890,682],[914,651],[930,627],[941,594]].map(([y,x])=>[y/941,x/1672]);
+  // Masks are tied to the photograph, so land never inherits the water distortion.
+  const isMaldives=photograph.dataset.waterScene==='maldives';
+  const shoreline=isMaldives?
+    [[0,.30],[.08,.51],[.16,.64],[.25,.70],[.40,.73],[.55,.76],[.65,.71],[.70,.65],[.74,.42],[.77,.16],[.81,.08],[.90,.07],[1,.10]]:
+    [[557,800],[582,774],[604,761],[620,727],[640,675],[649,653],[666,686],[681,691],[689,735],[701,866],[723,858],[738,830],[753,809],[771,813],[790,784],[807,750],[826,740],[842,724],[866,706],[890,682],[914,651],[930,627],[941,594]].map(([y,x])=>[y/941,x/1672]);
+  const waterStart=isMaldives?[0,.0001]:[.594,.625];
+  const nearStart=isMaldives?0:.61;
+  const amplitude=isMaldives?.00045:.0012;
   function coast(y){
     for(let i=1;i<shoreline.length;i++){
       if(y<=shoreline[i][0]){const [a,x]=shoreline[i-1],[b,z]=shoreline[i];return x+(z-x)*Math.max(0,Math.min(1,(y-a)/(b-a)));}
@@ -32,13 +38,13 @@
     ${coastShader}
     void main(){
       vec2 uv=v_uv*u_scale+u_offset;
-      float depth=smoothstep(.594,.625,uv.y);
+      float depth=smoothstep(${glNumber(waterStart[0])},${glNumber(waterStart[1])},uv.y);
       float coast=coastAt(uv.y);
       float water=depth*(1.0-smoothstep(coast-.0045,coast,uv.x));
-      float near=smoothstep(.61,1.0,uv.y);
+      float near=smoothstep(${glNumber(nearStart)},1.0,uv.y);
       float phase=uv.y*185.0-u_time*.62+sin(uv.x*14.0+u_time*.09)*.65;
       float swell=sin(phase)+sin(uv.y*310.0+uv.x*23.0-u_time*.41)*.36;
-      vec2 drift=vec2(sin(uv.y*130.0-u_time*.35)*.00028,swell*.0012)*water*mix(.25,1.0,near);
+      vec2 drift=vec2(sin(uv.y*130.0-u_time*.35)*.00018,swell*${glNumber(amplitude)})*water*mix(.25,1.0,near);
       vec3 color=texture2D(u_image,clamp(uv+drift,vec2(.001),vec2(.999))).rgb;
       float light=sin(phase+1.15)*sin(uv.x*33.0+u_time*.1)*.003*water*near;
       gl_FragColor=vec4(color+vec3(light,light*.84,light*.6),1.0);
@@ -57,6 +63,7 @@
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,photograph);
+    if(gl.getError()!==gl.NO_ERROR)return null;
     canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();switchToCanvas();});
     return {canvas,resize(width,height){
       canvas.width=width;canvas.height=height;gl.viewport(0,0,width,height);
@@ -73,7 +80,7 @@
       width=canvas.width=mask.width=w;height=canvas.height=mask.height=h;c=crop(w,h);
       maskCtx.clearRect(0,0,w,h);
       for(let y=0;y<h;y+=2){
-        const uvY=y/h*c.sy+c.oy,depth=smooth(.594,.625,uvY);
+        const uvY=y/h*c.sy+c.oy,depth=smooth(waterStart[0],waterStart[1],uvY);
         if(!depth)continue;
         const edge=(coast(uvY)-c.ox)/c.sx*w,soft=.0045/c.sx*w;
         if(edge<=0)continue;
@@ -86,11 +93,11 @@
       const iw=photograph.naturalWidth,ih=photograph.naturalHeight;
       const sourceWidth=c.sx*iw,sourceBand=c.sy/height*ih*2;
       for(let y=0;y<height;y+=2){
-        const uvY=y/height*c.sy+c.oy,depth=smooth(.594,.625,uvY);
+        const uvY=y/height*c.sy+c.oy,depth=smooth(waterStart[0],waterStart[1],uvY);
         if(!depth)continue;
-        const near=smooth(.61,1,uvY),strength=depth*(.25+.75*near);
+        const near=smooth(nearStart,1,uvY),strength=depth*(.25+.75*near);
         const swell=Math.sin(uvY*185-seconds*.62)+Math.sin(uvY*310-seconds*.41)*.36;
-        const dy=swell*.0012*strength,dx=Math.sin(uvY*130-seconds*.35)*.00028*strength;
+        const dy=swell*amplitude*strength,dx=Math.sin(uvY*130-seconds*.35)*.00018*strength;
         const sourceX=Math.max(0,Math.min(iw-sourceWidth,(c.ox+dx)*iw));
         const sourceY=Math.max(0,Math.min(ih-sourceBand,(uvY+dy)*ih));
         ctx.drawImage(photograph,sourceX,sourceY,sourceWidth,sourceBand,0,y,width,2);
@@ -121,7 +128,7 @@
   function resize(){
     if(!renderer)return;
     const r=hero.getBoundingClientRect();if(!r.width||!r.height)return;
-    const dpr=Math.min(window.devicePixelRatio||1,1.25,1600/r.width);
+    const dpr=Math.min(window.devicePixelRatio||1,2,3840/r.width);
     renderer.resize(Math.round(r.width*dpr),Math.round(r.height*dpr));renderer.draw(elapsed/1000);
   }
   function attach(){

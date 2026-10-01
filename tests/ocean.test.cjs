@@ -5,7 +5,7 @@ const vm=require('node:vm');
 
 // Offline controller tests: graphics and DOM boundaries are explicit adapters.
 // These do not open a browser or claim to verify the rendered appearance.
-function scene({reduced=false}={}) {
+function scene({reduced=false,maldives=false}={}) {
   const frames=new Map(), canvases=[], draws=[],maskRects=[];
   let nextFrame=0;
   function element() {
@@ -16,7 +16,7 @@ function scene({reduced=false}={}) {
       setAttribute(name,value){attributes[name]=String(value);},
       classList:{add(){},remove(){}},getBoundingClientRect(){return {width:1440,height:900};}};
   }
-  const photograph={...element(),complete:true,naturalWidth:1672,naturalHeight:941};
+  const photograph={...element(),complete:true,naturalWidth:maldives?3840:1672,naturalHeight:maldives?2160:941,dataset:{waterScene:maldives?'maldives':''}};
   const control={...element(),hidden:true};
   const hero={...element(),querySelector(selector){return selector==='.hero-image'?photograph:selector==='.scene-motion'?control:{};},
     insertBefore(canvas){canvas.attached=true;},append(canvas){canvas.attached=true;}};
@@ -106,4 +106,14 @@ test('the water displacement stays subtle throughout an animation cycle',()=>{
     const originalY=destinationY/900*941;
     assert.ok(Math.abs(sourceY-originalY)<=1.65,'water must drift less than two source pixels');
   }
+});
+
+
+test('the 4K Maldives scene animates open water while excluding the island',()=>{
+  const s=scene({maldives:true});
+  const upper=s.maskRects.find(rect=>rect.y===200);
+  const island=s.maskRects.find(rect=>rect.y===850);
+  assert.ok(upper.width>650,'open water in the upper half must receive movement');
+  assert.ok(!island||island.width<150,'foreground island must not be displaced');
+  assert.equal(s.control.hidden,false);
 });
