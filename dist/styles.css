@@ -121,12 +121,16 @@ body.dialog-open{overflow:hidden}dialog{padding:0;border:0;color:var(--ink);back
 /* Keep the shared navigation centered and the primary header action intact. */
 .desktop-nav{align-items:center}.header-cta{flex-shrink:0;white-space:nowrap}
 
-/* A quiet flight behind the wordmark, with a slower opening. */
-.brand-intro{overflow:hidden}.brand-intro-frame{z-index:1}.brand-flight{position:absolute;inset:0;pointer-events:none}.brand-aircraft{position:absolute;width:clamp(110px,13vw,185px);height:auto;left:calc(50% - 500px);top:calc(50% - 43px);fill:#8d795a;opacity:0;animation:brandFlight 2.05s .15s cubic-bezier(.3,.1,.7,.9) both}
-@keyframes brandFlight{0%{opacity:0;transform:translate3d(-50px,12px,0) rotate(-7deg)}18%{opacity:.17}78%{opacity:.17}100%{opacity:0;transform:translate3d(1000px,-20px,0) rotate(-7deg)}}
-@media(max-width:760px){.brand-aircraft{left:-140px;top:calc(50% - 30px);animation-name:brandFlightMobile}@keyframes brandFlightMobile{0%{opacity:0;transform:translate3d(0,12px,0) rotate(-7deg)}18%,78%{opacity:.15}100%{opacity:0;transform:translate3d(calc(100vw + 280px),-15px,0) rotate(-7deg)}}}
-@media(prefers-reduced-motion:reduce){.brand-flight{display:none}.brand-aircraft{animation:none}}
+/* A detailed jet circles the brand once, following the path's tangent. */
+.brand-intro{overflow:hidden}.brand-intro-frame{z-index:1}.brand-flight{position:absolute;inset:0;pointer-events:none}.brand-flyby{position:absolute;left:50%;top:50%;width:125px;opacity:0;offset-path:path("M -260 0 C -260 -83 -143 -150 0 -150 C 143 -150 260 -83 260 0 C 260 83 143 150 0 150 C -143 150 -260 83 -260 0");offset-rotate:auto;offset-anchor:center;animation:brandOrbit 2.1s .15s cubic-bezier(.35,.05,.65,.95) both;will-change:offset-distance,opacity}.brand-aircraft{display:block;width:100%;height:auto;filter:drop-shadow(0 5px 4px #6b665724)}.brand-contrail{position:absolute;right:92%;top:50%;width:85px;height:7px;transform:translateY(-50%);background:linear-gradient(90deg,transparent,#b8b09c33);clip-path:polygon(0 40%,100% 20%,100% 80%,0 60%);filter:blur(1px)}
+@keyframes brandOrbit{0%{offset-distance:0%;opacity:0}12%{opacity:.65}50%{opacity:.75}86%{opacity:.65}100%{offset-distance:100%;opacity:0}}
+@media(max-width:760px){.brand-flyby{width:96px;offset-path:path("M -145 0 C -145 -74 -80 -134 0 -134 C 80 -134 145 -74 145 0 C 145 74 80 134 0 134 C -80 134 -145 74 -145 0")}.brand-contrail{width:60px}}
+@supports not (offset-path:path("M 0 0 L 1 1")){.brand-flyby{animation-name:brandOrbitFallback;transform-origin:center}@keyframes brandOrbitFallback{0%{opacity:0;transform:translate(-260px,0) rotate(-90deg)}25%{opacity:.65;transform:translate(0,-150px) rotate(0deg)}50%{opacity:.75;transform:translate(260px,0) rotate(90deg)}75%{opacity:.65;transform:translate(0,150px) rotate(180deg)}100%{opacity:0;transform:translate(-260px,0) rotate(270deg)}}}
+@media(prefers-reduced-motion:reduce){.brand-flight{display:none}.brand-flyby{animation:none;will-change:auto}}
 
 /* Sua viagem mirrors the photographed destination disclosure. */
 .desktop-nav .services-panel{width:min(650px,calc(100vw - 100px));padding:0;display:grid;grid-template-columns:200px minmax(0,1fr);overflow:hidden}.service-menu-photo{position:relative;min-height:460px;color:#fff;overflow:hidden}.service-menu-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% center}.service-menu-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#14251b0a 35%,#14251bd9)}.service-menu-photo>div{position:absolute;bottom:29px;left:24px;right:20px;z-index:1}.service-menu-photo .eyebrow{font-size:.5625rem;letter-spacing:.13em;margin-bottom:15px}.service-menu-photo p:not(.eyebrow){font-family:var(--serif);font-size:1.85rem;line-height:1.12}.service-menu-content{padding:28px 28px 18px}.service-menu-content>.eyebrow{font-size:.625rem;color:#8b7658}
 @media(min-width:1001px) and (max-width:1250px){.desktop-nav .services-panel{width:600px;grid-template-columns:180px minmax(0,1fr)}}
+
+/* No dividing line over the full-bleed photograph. */
+.photo-page .header:not(.scrolled),body:not(.inner-page) .header:not(.scrolled){border-bottom:0}

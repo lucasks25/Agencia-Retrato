@@ -43,3 +43,9 @@ O hero de Sobre nós usa uma fotografia 4K de fachadas comerciais ao entardecer,
 A abertura foi estendida para aproximadamente 2,7 segundos, com avião vetorial dourado discreto passando atrás da marca. Movimento e escala se adaptam ao celular. Toque, teclado, retorno pelo histórico e preferência de movimento reduzido continuam interrompendo ou dispensando a abertura.
 
 O menu Sua viagem agora usa painel fotográfico lateral e conteúdo ao lado, com a mesma linguagem visual e controlador animado de Destinos. A foto mostra uma viajante com mala no aeroporto, relacionando a imagem aos serviços antes, durante e depois do embarque.
+
+O avião da abertura foi refinado: fuselagem com acabamento metálico suave, asas enflechadas, dois motores, cabine e janelas. O voo percorre uma curva ascendente leve, muda discretamente o ângulo e a escala e deixa um rastro difuso, sempre atrás da marca. A duração e a interrupção acessível permanecem.
+
+Por ajuste do usuário, o avião agora faz uma volta elíptica completa em torno da marca, com orientação automática pela tangente e rastro suave. O percurso tem escala própria no celular, alternativa CSS para navegadores sem motion path e mantém dispensa por movimento reduzido, toque ou teclado.
+
+A linha inferior do cabeçalho foi removida quando ele está transparente sobre fotos; o cabeçalho opaco após rolagem mantém sua separação.
