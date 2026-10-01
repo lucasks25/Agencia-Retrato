@@ -15,7 +15,7 @@ HOME=(ROOT/'templates/home.html').read_text()
 HOME=re.sub(r'    <section class="google-reviews.*?</section>',review_section(),HOME,flags=re.S)
 HOME=HOME.replace('  <dialog class="destination-dialog"','  '+review_dialog()+'\n  <dialog class="destination-dialog"',1)
 HOME=HOME.replace('<script src="app.js" defer></script>','<script src="app.js" defer></script><script src="experience.js" defer></script>')
-HOME=HOME.replace('<script src="app.js" defer></script>','<script src="brand.js" defer></script><script src="navigation.js" defer></script><script src="app.js" defer></script>')
+HOME=HOME.replace('<script src="app.js" defer></script>','<script src="brand.js" defer></script><script src="navigation.js" defer></script><script src="lenis.min.js" defer></script><script src="smooth-scroll.js" defer></script><script src="app.js" defer></script>')
 HOME=HOME.replace('assets/hero.jpg','assets/landscape-maldives-4k.webp')
 HOME=HOME.replace('class="hero-image"','class="hero-image" data-water-scene="maldives" width="3840" height="2160"')
 HOME=HOME.replace('Refúgio à beira-mar ao entardecer, com coqueiros e espaços de descanso diante do oceano','Vista aérea de ilhas, villas e mar azul nas Maldivas')
@@ -50,8 +50,8 @@ def local(url):
 def link_map(html):
     return re.sub(r'href="(https://(?:www\.)?agenciaretrato\.com[^\"]*)"',lambda m:'href="'+local(m.group(1))+'"'+(' data-local="true"' if local(m.group(1)).startswith('/') else ''),html)
 def root_assets(html):
-    versions={name:hashlib.sha256((DIST/name).read_bytes()).hexdigest()[:12] for name in ('styles.css','app.js','ocean.js','experience.js','navigation.js','brand.js')}
-    return re.sub(r'(href|src)="(assets/[^\"]*|styles\.css|app\.js|ocean\.js|experience\.js|navigation\.js|brand\.js)"',lambda m:m.group(1)+'="/'+m.group(2)+('?v='+versions[m.group(2)] if m.group(2) in versions else '')+'"',html)
+    versions={name:hashlib.sha256((DIST/name).read_bytes()).hexdigest()[:12] for name in ('styles.css','app.js','ocean.js','experience.js','navigation.js','brand.js','lenis.min.js','smooth-scroll.js')}
+    return re.sub(r'(href|src)="(assets/[^\"]*|styles\.css|app\.js|ocean\.js|experience\.js|navigation\.js|brand\.js|lenis\.min\.js|smooth-scroll\.js)"',lambda m:m.group(1)+'="/'+m.group(2)+('?v='+versions[m.group(2)] if m.group(2) in versions else '')+'"',html)
 def clean_interface(html,quiet=False):
     for old,(new,alt) in LANDSCAPES.items():
         html=re.sub(r'<img\b[^>]*src="/?assets/'+re.escape(old)+r'"[^>]*>',lambda m:m.group(0) if 'data-preserve-photo' in m.group(0) else re.sub(r'alt="[^"]*"','alt="'+h(alt)+'"',m.group(0).replace(old,new)),html)
