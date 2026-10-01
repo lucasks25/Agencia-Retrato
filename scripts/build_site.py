@@ -87,7 +87,7 @@ def create(path,title,content,description='',extra=''):
     head=re.sub(r'<meta property="og:description" content="[^"]*">',f'<meta property="og:description" content="{h(description or title)}">',head)
     head=re.sub(r'  <link rel="preload"[^\n]*\n','',head)
     html='<!doctype html>\n<html lang="pt-BR">\n'+head+'\n<body class="inner-page '+extra+'"><a class="skip" href="#conteudo">Ir para o conteúdo</a>'+SHELL_HEADER+'<main id="conteudo">'+content+'</main>'+SHELL_FOOTER+DIALOGS+'</body></html>'
-    html=clean_interface(root_assets(link_map(html)),quiet=path in {'política-de-privacidade','política-de-cookies','termos-e-condições','contato','retrato-chip','seguro-viagem','members','retratonews/seguro-viagem-retrato-universal-assistance'})
+    html=clean_interface(root_assets(link_map(html)),quiet=path in {'política-de-privacidade','política-de-cookies','termos-e-condições'})
     html=html.replace('href="#inicio"','href="/"').replace('href="#destinos"','href="/roteiros/"').replace('href="#experiencia"','href="/agencia-boutique/"').replace('href="#sobre"','href="/sobre/"').replace('href="#journal"','href="/retrato-news/"')
     html=re.sub(r'(<a[^>]*data-local="true"[^>]*)(?: target="_blank")',r'\1',html)
     target.write_text(html)

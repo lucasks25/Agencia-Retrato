@@ -2,7 +2,7 @@
   const hero=document.querySelector('.hero');
   const photograph=hero?.querySelector('.hero-image');
   const control=hero?.querySelector('.scene-motion');
-  if(!hero||!photograph||!control)return;
+  if(!hero||!photograph)return;
   const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
   let renderer=null,frame=0,lastTime=0,lastDraw=0,elapsed=0,inView=true,userChoice=null;
   const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);};
@@ -119,9 +119,9 @@
   function updateControl(){
     if(!renderer)return;
     const active=playing();
-    control.hidden=false;control.setAttribute('aria-pressed',String(active));
+    if(control){control.hidden=false;control.setAttribute('aria-pressed',String(active));
     control.setAttribute('aria-label',active?'Pausar o movimento do mar':'Ativar o movimento do mar');
-    control.innerHTML=active?'<span aria-hidden="true">Ⅱ</span> Pausar o mar':'<span aria-hidden="true">▷</span> Ativar o mar';
+    control.innerHTML=active?'<span aria-hidden="true">Ⅱ</span> Pausar o mar':'<span aria-hidden="true">▷</span> Ativar o mar';}
     renderer.canvas.hidden=preference.matches&&userChoice===null;
     if(active)resume();else suspend();
   }
@@ -139,7 +139,7 @@
   function switchToCanvas(){
     suspend();const previous=renderer;
     renderer=canvasRenderer();previous?.canvas.remove();
-    if(renderer)attach();else{hero.classList.remove('has-water-motion');control.hidden=true;}
+    if(renderer)attach();else{hero.classList.remove('has-water-motion');if(control)control.hidden=true;}
   }
   function load(){
     if(renderer||!photograph.naturalWidth)return;
@@ -147,7 +147,7 @@
     if(!renderer)renderer=canvasRenderer();
     if(renderer)attach();
   }
-  control.addEventListener('click',()=>{userChoice=!playing();updateControl();});
+  control?.addEventListener('click',()=>{userChoice=!playing();updateControl();});
   preference.addEventListener('change',()=>{userChoice=null;updateControl();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)suspend();else resume();});
   if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(hero);

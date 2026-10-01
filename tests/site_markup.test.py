@@ -56,6 +56,12 @@ class Structure(HTMLParser):
 
 
 class SharedMarkup(unittest.TestCase):
+    def test_travel_service_pages_keep_the_main_header_button(self):
+        for route in ['contato', 'retrato-chip', 'seguro-viagem', 'members', 'retratonews/seguro-viagem-retrato-universal-assistance']:
+            with self.subTest(route=route):
+                header = (ROOT / 'dist' / route / 'index.html').read_text().split('<header', 1)[1].split('</header>', 1)[0]
+                self.assertEqual(header.count('class="header-cta"'), 1)
+
     def test_planning_offers_every_destination_and_traveler_group(self):
         page = Structure((ROOT / 'dist/index.html').read_text())
         self.assertEqual(page.options['trip-destination'], ['Ainda quero descobrir', 'Milagres, Alagoas', 'Praia do Preá, Ceará', 'Rio de Janeiro', 'Maldivas', 'Roma, Itália', 'Outro destino'])

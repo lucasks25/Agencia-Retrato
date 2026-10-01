@@ -5,7 +5,7 @@ const vm=require('node:vm');
 
 // Offline controller tests: graphics and DOM boundaries are explicit adapters.
 // These do not open a browser or claim to verify the rendered appearance.
-function scene({reduced=false,maldives=false}={}) {
+function scene({reduced=false,maldives=false,withoutControl=false}={}) {
   const frames=new Map(), canvases=[], draws=[],maskRects=[];
   let nextFrame=0;
   function element() {
@@ -18,7 +18,7 @@ function scene({reduced=false,maldives=false}={}) {
   }
   const photograph={...element(),complete:true,naturalWidth:maldives?3840:1672,naturalHeight:maldives?2160:941,dataset:{waterScene:maldives?'maldives':''}};
   const control={...element(),hidden:true};
-  const hero={...element(),querySelector(selector){return selector==='.hero-image'?photograph:selector==='.scene-motion'?control:{};},
+  const hero={...element(),querySelector(selector){return selector==='.hero-image'?photograph:selector==='.scene-motion'?(withoutControl?null:control):{};},
     insertBefore(canvas){canvas.attached=true;},append(canvas){canvas.attached=true;}};
   const preference={...element(),matches:reduced};
   const document={...element(),hidden:false,querySelector(){return hero;},createElement(tag){
@@ -40,6 +40,12 @@ function scene({reduced=false,maldives=false}={}) {
   function advance(now){const queued=[...frames.values()];frames.clear();for(const fn of queued)fn(now);}
   return {control,document,preference,frames,draws,canvases,maskRects,advance};
 }
+
+test('the sea keeps moving without a visible motion control',()=>{
+  const s=scene({withoutControl:true,maldives:true});
+  assert.ok(s.frames.size>0);
+  s.advance(50);assert.ok(s.draws.length>0);
+});
 
 test('unavailable WebGL still produces animated sea frames through Canvas 2D',()=>{
   const s=scene();
