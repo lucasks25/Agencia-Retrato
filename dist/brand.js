@@ -13,5 +13,5 @@
   document.addEventListener('keydown',dismiss,true);
   preference.addEventListener('change',dismiss);
   window.addEventListener('pageshow',event=>{if(event.persisted)dismiss();});
-  timer=setTimeout(dismiss,1350);
+  timer=setTimeout(dismiss,2700);
 })();

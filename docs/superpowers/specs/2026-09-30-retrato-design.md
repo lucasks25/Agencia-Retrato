@@ -39,3 +39,7 @@ As páginas de Sua viagem agora mantêm a mesma ação principal e alinhamento d
 Por correção explícita do usuário, os cinco cards de destinos voltaram às fotografias anteriores, sem substituição automática de seleção. O rodapé do hero não exibe botão de movimento nem o link O próximo capítulo começa aqui; o mar continua animado e respeita movimento reduzido sem depender da presença de controle visual.
 
 O hero de Sobre nós usa uma fotografia 4K de fachadas comerciais ao entardecer, sem pessoas, solicitada pelo usuário. A imagem de Dima/Unsplash é ilustrativa e não representa a sede da agência. A troca está restrita a esse hero.
+
+A abertura foi estendida para aproximadamente 2,7 segundos, com avião vetorial dourado discreto passando atrás da marca. Movimento e escala se adaptam ao celular. Toque, teclado, retorno pelo histórico e preferência de movimento reduzido continuam interrompendo ou dispensando a abertura.
+
+O menu Sua viagem agora usa painel fotográfico lateral e conteúdo ao lado, com a mesma linguagem visual e controlador animado de Destinos. A foto mostra uma viajante com mala no aeroporto, relacionando a imagem aos serviços antes, durante e depois do embarque.
