@@ -4,7 +4,7 @@
   if(!intro||preference.matches)return;
   // Replay the signature on every homepage arrival, including reloads.
   if(document.body?.classList.contains('inner-page'))return;
-  let timer=0,openingTime=3850;
+  let timer=0,openingTime=4500;
   function dismiss(){
     clearTimeout(timer);intro.hidden=true;
     document.removeEventListener('pointerdown',dismiss,true);
@@ -19,10 +19,13 @@
     const control1X=startX*.36,control2X=endX*.28;
     aircraft.style.offsetPath=`path("M ${startX} ${startY} C ${control1X} 15 ${control2X} -110 ${endX} ${endY}")`;
     const distance=Math.hypot(endX-startX,endY-startY);
-    const flightSeconds=Math.max(2.8,Math.min(4.2,distance/600));
+    const flightSeconds=Math.max(3.1,Math.min(4.4,distance/550));
     aircraft.style.setProperty('--brand-flight-duration',`${flightSeconds}s`);
-    intro.style.setProperty('--brand-opening-duration',`${flightSeconds+.75}s`);
-    openingTime=(flightSeconds+.8)*1000;
+    // Reveal begins only after the aircraft has crossed the viewport.
+    const revealDelay=flightSeconds+.25,revealSeconds=1.1;
+    intro.style.setProperty('--brand-reveal-delay',`${revealDelay}s`);
+    intro.style.setProperty('--brand-reveal-duration',`${revealSeconds}s`);
+    openingTime=(revealDelay+revealSeconds+.15)*1000;
   }
   document.addEventListener('pointerdown',dismiss,true);
   document.addEventListener('keydown',dismiss,true);
